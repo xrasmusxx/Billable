@@ -1,0 +1,18 @@
+<!-- src/main/resources/templates/home.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Home · Billable</title>
+</head>
+<body>
+<main class="container">
+    <hgroup>
+        <h1>Billable</h1>
+        <p>Time tracking and invoicing for freelancers.</p>
+    </hgroup>
+
+    <p>Today is <span th:text="${#temporals.format(today, 'dd.MM.yyyy')}">01.01.2026</span>.</p>
+</main>
+</body>
+</html>

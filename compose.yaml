@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: billable
+      POSTGRES_USER: billable
+      POSTGRES_PASSWORD: billable
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  app:
+    image: maven:3.9-eclipse-temurin-25
+    profiles: ["app"]
+    working_dir: /workspace
+    command: mvn -B spring-boot:run
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/billable
+      SPRING_DATASOURCE_USERNAME: billable
+      SPRING_DATASOURCE_PASSWORD: billable
+      SPRING_DOCKER_COMPOSE_ENABLED: "false"
+      SPRING_MAIL_HOST: mailpit
+      SPRING_MAIL_PORT: 1025
+      TESTCONTAINERS_HOST_OVERRIDE: host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/workspace
+      - maven-repo:/root/.m2
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  pgdata:
+  maven-repo:

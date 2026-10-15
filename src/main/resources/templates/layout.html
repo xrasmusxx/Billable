@@ -1,0 +1,36 @@
+<!-- src/main/resources/templates/layout.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, content)">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:replace="${title}">Billable</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+
+<header class="container">
+    <nav>
+        <ul>
+            <li><strong>Billable</strong></li>
+        </ul>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container" th:if="${status}">
+    <article role="status" th:text="${status}">Saved.</article>
+</div>
+
+<main class="container" th:replace="${content}">
+    <p>The page content goes here.</p>
+</main>
+
+<footer class="container">
+    <small>Billable</small>
+</footer>
+
+</body>
+</html>
