@@ -71,4 +71,4 @@ Formatting-only changes go in their own `style:` commit.
 
 | Date | Change |
 |---|---|
-| 2026-10-07 | First version agreed by the group. |
+| 2026-10-07 | First version agreed by the group. | 

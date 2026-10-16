@@ -12,8 +12,7 @@ public class HomeController {
   private static final ZoneId TALLINN = ZoneId.of("Europe/Tallinn");
 
   @GetMapping("/")
-  public String home(Model model) {
-    model.addAttribute("today", LocalDate.now(TALLINN));
-    return "home";
-  }
+  public String home(Model model){
+    model.addAttribute("today",LocalDate.now(TALLINN));
+    return "home";}
 }
