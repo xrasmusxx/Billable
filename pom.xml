@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>25</java.version>
+		<spotless.version>3.10.4</spotless.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -120,7 +121,27 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.diffplug.spotless</groupId>
+				<artifactId>spotless-maven-plugin</artifactId>
+				<version>${spotless.version}</version>
+				<configuration>
+					<java>
+						<googleJavaFormat/>
+						<removeUnusedImports/>
+					</java>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+
 	</build>
 
 </project>

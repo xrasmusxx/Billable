@@ -1,2 +1,5 @@
+# .gitattributes — add as the first line, keep the generated lines below it
+* text=auto eol=lf
+
 /mvnw text eol=lf
 *.cmd text eol=crlf
