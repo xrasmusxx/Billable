@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Clients · Billable</title>
+</head>
+<body>
+<main class="container">
+    <h1>Clients</h1>
+
+    <p th:if="${page.empty}">No clients yet.</p>
+
+    <th:block th:unless="${page.empty}">
+        <p th:text="|${page.totalElements} clients|">3 clients</p>
+
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">VAT number</th>
+                <th scope="col">Projects</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="client : ${page.content}">
+                <td>
+                    <a th:href="@{/clients/{id}(id=${client.id})}" th:text="${client.name}">Acme OÜ</a>
+                </td>
+                <td th:text="${client.email}">billing@acme.test</td>
+                <td th:text="${client.vatNumber} ?: '—'">EE101234567</td>
+                <td th:text="${projectCounts.get(client.id)}">3</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <nav th:if="${page.totalPages > 1}" th:with="current=${page.number + 1}" aria-label="Pagination">
+            <ul>
+                <li>
+                    <a th:if="${page.hasPrevious()}" th:href="@{/clients(page=${current - 1})}"
+                       rel="prev">← Previous</a>
+                    <span th:unless="${page.hasPrevious()}" aria-disabled="true">← Previous</span>
+                </li>
+            </ul>
+            <ul>
+                <li th:text="|Page ${current} of ${page.totalPages}|">Page 1 of 3</li>
+            </ul>
+            <ul>
+                <li>
+                    <a th:if="${page.hasNext()}" th:href="@{/clients(page=${current + 1})}"
+                       rel="next">Next →</a>
+                    <span th:unless="${page.hasNext()}" aria-disabled="true">Next →</span>
+                </li>
+            </ul>
+        </nav>
+    </th:block>
+</main>
+</body>
+</html>

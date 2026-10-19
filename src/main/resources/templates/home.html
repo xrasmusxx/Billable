@@ -13,6 +13,10 @@
     </hgroup>
 
     <p>Today is <span th:text="${#temporals.format(today, 'dd.MM.yyyy')}">01.01.2026</span>.</p>
+    <p>
+        You have <strong th:text="${clientCount}">0</strong> clients
+        and <strong th:text="${projectCount}">0</strong> projects.
+    </p>
 </main>
 </body>
 </html>
