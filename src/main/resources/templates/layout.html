@@ -22,7 +22,7 @@
     </nav>
 </header>
 
-<div class="container" th:if="${status}">
+<div class="container" th:if="${status != null and timestamp == null}">
     <article role="status" th:text="${status}">Saved.</article>
 </div>
 

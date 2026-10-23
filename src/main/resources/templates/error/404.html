@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Not found · Billable</title>
+</head>
+<body>
+<main class="container">
+    <h1>Not found</h1>
+    <p>The page or record you asked for does not exist. It may have been deleted, or the link is wrong.</p>
+    <p><small th:text="${path}">/clients/999</small></p>
+    <p><a th:href="@{/}">Back to the home page</a></p>
+</main>
+</body>
+</html>
