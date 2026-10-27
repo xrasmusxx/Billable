@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:replace="${title}">Billable</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        .flash { padding: 0.75rem 1rem; }
+        .flash-success { border-left: 0.35rem solid #2e7d32; }
+        .flash-error { border-left: 0.35rem solid #c62828; }
+    </style>
 </head>
 <body>
 
@@ -22,8 +27,13 @@
     </nav>
 </header>
 
-<div class="container" th:if="${status != null and timestamp == null}">
-    <article role="status" th:text="${status}">Saved.</article>
+<div class="container" th:if="${timestamp == null}">
+    <article class="flash flash-success" role="status" th:if="${status}" th:text="${status}">
+        Saved.
+    </article>
+    <article class="flash flash-error" role="alert" th:if="${error}" th:text="${error}">
+        Something went wrong.
+    </article>
 </div>
 
 <main class="container" th:replace="${content}">

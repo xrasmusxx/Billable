@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<form th:fragment="form(action, submitLabel)" th:action="${action}" th:object="${form}" method="post">
+
+    <label for="name">
+        Name
+        <input type="text" th:field="*{name}" maxlength="120" required
+               th:aria-invalid="${#fields.hasErrors('name')} ? 'true'">
+        <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</small>
+    </label>
+
+    <label for="email">
+        E-mail
+        <input type="email" th:field="*{email}" maxlength="255" required
+               th:aria-invalid="${#fields.hasErrors('email')} ? 'true'">
+        <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}">E-mail error</small>
+    </label>
+
+    <label for="vatNumber">
+        VAT number <small>(optional, e.g. EE101234567)</small>
+        <input type="text" th:field="*{vatNumber}" maxlength="20"
+               th:aria-invalid="${#fields.hasErrors('vatNumber')} ? 'true'">
+        <small th:if="${#fields.hasErrors('vatNumber')}" th:errors="*{vatNumber}">VAT error</small>
+    </label>
+
+    <button type="submit" th:text="${submitLabel}">Save</button>
+</form>
+</body>
+</html>

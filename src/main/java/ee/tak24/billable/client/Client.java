@@ -51,6 +51,12 @@ public class Client {
         this.vatNumber = vatNumber;
     }
 
+    public void update(String name, String email, String vatNumber) {
+        this.name = name;
+        this.email = email;
+        this.vatNumber = vatNumber;
+    }
+
     public Long getId() {
         return id;
     }

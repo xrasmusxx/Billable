@@ -27,6 +27,16 @@
         </tbody>
     </table>
 
+    <div class="grid">
+        <a th:href="@{/clients/{id}/edit(id=${client.id})}" role="button" class="secondary">Edit</a>
+
+        <form th:action="@{/clients/{id}/delete(id=${client.id})}" method="post"
+              th:data-confirm="|Delete client ${client.name}? This cannot be undone.|"
+              onsubmit="return confirm(this.dataset.confirm)">
+            <button type="submit" class="contrast">Delete</button>
+        </form>
+    </div>
+
     <h2>Projects</h2>
 
     <p th:if="${projects.isEmpty()}">This client has no projects yet.</p>
@@ -51,7 +61,7 @@
             <td th:text="${@formatters.eurosOrDash(project.fixedPriceCents)}">—</td>
             <td th:text="${@formatters.eurosOrDash(project.budgetCapCents)}">—</td>
             <td th:text="|${project.roundingMinutes} min|">15 min</td>
-            <td th:text="${project.archived} ? 'Archived' : 'Active'">Active</td>
+            <td th:text="${project.archivedAt != null} ? 'Archived' : 'Active'">Active</td>
         </tr>
         </tbody>
     </table>

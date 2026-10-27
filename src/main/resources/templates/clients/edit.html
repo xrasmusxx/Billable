@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title th:text="|Edit ${client.name} · Billable|">Edit client · Billable</title>
+</head>
+<body>
+<main class="container">
+    <h1 th:text="|Edit ${client.name}|">Edit client</h1>
+
+    <form th:replace="~{clients/form :: form(action=@{/clients/{id}(id=${client.id})}, submitLabel='Save changes')}"></form>
+
+    <p><a th:href="@{/clients/{id}(id=${client.id})}">Cancel</a></p>
+</main>
+</body>
+</html>

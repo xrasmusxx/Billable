@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>New client · Billable</title>
+</head>
+<body>
+<main class="container">
+    <h1>New client</h1>
+
+    <form th:replace="~{clients/form :: form(action=@{/clients}, submitLabel='Create client')}"></form>
+
+    <p><a th:href="@{/clients}">Back to clients</a></p>
+</main>
+</body>
+</html>

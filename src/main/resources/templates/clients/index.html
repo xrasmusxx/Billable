@@ -8,6 +8,7 @@
 <main class="container">
     <h1>Clients</h1>
 
+    <p><a th:href="@{/clients/new}" role="button">New client</a></p>
     <p th:if="${page.empty}">No clients yet.</p>
 
     <th:block th:unless="${page.empty}">
